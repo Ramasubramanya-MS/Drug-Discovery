@@ -1,0 +1,98 @@
+.pipeline {
+  display: flex;
+  flex-wrap: nowrap;                 /* single line */
+  align-items: stretch;
+  gap: 28px;                         /* clear spacing */
+  overflow-x: auto;                  /* smooth horizontal scroll if needed */
+  padding: 6px 2px 18px;
+  scrollbar-width: thin;
+}
+
+.pipeline::-webkit-scrollbar { height: 8px; }
+.pipeline::-webkit-scrollbar-thumb { background: #2b3650; border-radius: 8px; }
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  padding: 18px;
+  flex: 0 0 320px;                   /* larger, consistent */
+  min-height: 260px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 14px;
+  position: relative;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 200ms ease;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.25);
+}
+
+.card[data-enabled="true"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.35);
+  border-color: rgba(79,139,255,0.55);
+}
+
+.card[data-state="running"] {
+  border-color: rgba(79,139,255,0.9);
+  box-shadow: 0 0 0 2px rgba(79,139,255,0.25) inset, 0 10px 30px rgba(79,139,255,0.20);
+}
+.card[data-state="done"] {
+  border-image: linear-gradient(90deg, #27d39f, #4f8bff) 1;
+}
+.card[data-state="error"] {
+  border-color: rgba(255,96,96,0.8);
+  box-shadow: 0 0 0 2px rgba(255,96,96,0.25) inset, 0 12px 28px rgba(255,96,96,0.18);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: #eaf0ff;
+  letter-spacing: 0.15px;
+}
+
+.body {
+  font-size: 0.98rem;
+  color: rgba(255,255,255,0.86);
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.connector {
+  flex: 0 0 64px;
+  align-self: center;
+  height: 2px;
+  position: relative;
+  background: linear-gradient(90deg, rgba(255,255,255,0.20), rgba(255,255,255,0.06));
+  border-radius: 2px;
+  opacity: 0.9;
+}
+
+.connector::after {                 /* arrow head */
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid rgba(255,255,255,0.35);
+  border-top: 2px solid rgba(255,255,255,0.35);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@media (max-width: 1200px) {
+  .card { flex-basis: 300px; }
+}
